@@ -1,0 +1,51 @@
+<html>
+    <head></head>
+
+    <body>
+        <h1 id="grade">
+
+        </h1>
+
+        <script>
+
+            const myArray = [1, 2, 'apple', 4.15, 5, true, false,'apple', 'banana', 'apple'];
+            
+            // includes -> 배열에 존재하냐
+            // console.log("apple이 있냐? " + myArray.includes('apple'))
+            // console.log("orange 있냐? " + myArray.includes('orange'))
+
+            // 어디에 있냐 -> indexOf
+            // console.log('Apple이 있냐? ' + myArray.indexOf('apple')); // 있으면 해당 인덱스 반환
+            // console.log('orange가 있냐? ' + myArray.indexOf('orange')); // 없으면 -1반환
+
+            // 함수형태 -> indexOf('apple', fromindx) --> apple을 찾는데, fromindx부터 찾을 거임
+            
+            // 함수형태 -> lastIndexOf('apple', fromIndex) -> 마지막에 있는 apple을 찾는데, fromindx부터 찾을 거임
+            // 이때 fromindx는 뒤에서부터 앞으로 탐색
+            // console.log("apple이 있냐? " + myArray.lastIndexOf('apple')) // 9
+            // console.log("apple이 있냐? " + myArray.lastIndexOf('apple', 8)) //7
+            // console.log("apple이 있냐? " + myArray.lastIndexOf('apple',1)) // -1
+
+            // 배열에 포함된 사과를 제거
+            /* for (let i=0; i<myArray.length; i++){
+                if (myArray[i] == 'apple'){
+                    myArray.splice(i,1)
+                }
+            }
+            console.log(myArray) */
+
+            // 배열에 포함된 사과는 몇 개?
+            /*let count =0;
+            for (let i=0; i<myArray.length; i++){
+                if (myArray[i] === 'apple'){
+                    count += 1
+                }
+            }
+            console.log(count) */
+
+
+
+
+        </script>
+    </body>
+</html>
