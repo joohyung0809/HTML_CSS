@@ -1,0 +1,122 @@
+<html>
+    <head></head>
+
+    <body>
+        <h1 id="grade">
+
+        </h1>
+
+        <script>
+
+            // Literal --> 값 자체
+            // 1,2,3  Integer Literal
+            // 3.14  floating point number literal
+            // 'hello' String literal
+
+            // Object Literal: 배열을 만드는데 인덱스를 숫자로만 하는 것이 아님.
+            const person = {name:'찰스', age:20};
+            /*console.log('person name : '+ person.name)
+            console.log('person name : '+ person['name'])
+
+            person.age = 35
+            console.log('person age: '+ person.age)*/
+
+            //console.log('Keys: '+ Object.keys(person));
+            //console.log('Keys: '+ Object.values(person));
+
+            const showOL = (ol) => {
+                const keys = Object.keys(ol);
+                keys.forEach((elem, idx) => {
+                    console.log(elem + '--->'  + ol[elem])
+                });
+            };
+
+
+            // showOL(person);
+
+
+            person.sayHello = () => {console.log('Hello!!! ')};
+            person.sayHello2 = (v) => {console.log(v+ ' Hi!!! ')};
+            // object literal에 method 추가
+            person.areYouOlderThan = (_age) => {
+                if (person.age > _age){
+                    return true;
+                }
+                else return false;
+            }
+
+            // person.sayHello();
+            // person.sayHello2('찰스')
+
+            // const check_age = 30;
+            // console.log('Are you older than'+check_age+'? ' + person.areYouOlderThan(check_age))
+
+
+            // object literal에 object literal 추가
+            /* const a = {
+                name:'찰스',
+                detail: {
+                    name : '톰',
+                    age: 10
+                }
+            }*/
+            // console.log(a.detail.name) // 중복 literal 값 출력
+
+
+            // object literal 비교
+            /*const a = {name:'찰스', age:20};
+            const b = {name:'로라', age:25};
+            const c = {name:'찰스', age:20};
+            const d = a*/
+
+            /*if(a===c){ //다르다로 출력되는 이유 : 주소가 다르기 때문
+                console.log('같다');
+            }
+            else{
+                console.log("다르다");
+            }*/
+
+            // 그럼 진짜 내용이 같은지 비교하려면??
+            /* const cmp_ol = (_x1, _x2) => {
+                if((_x1.name === _x2.name) && (_x1.age === _x2.age)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }*/
+
+            // console.log('cmp_ol: ' + cmp_ol(a,d));
+
+            const cmp_ol = (_x1, _x2) => {
+                const _x1_keys = Object.keys(_x1);
+                const _x2_keys = Object.keys(_x2);
+
+                if(_x1_keys.length !== _x2_keys.length) {
+                    return false;
+                }
+
+                _x1_keys = _x1_keys.sort();
+                _x2_keys = _x2_keys.sort();
+
+                _x1_keys.forEach(  (elem, idx)  =>  {
+                    if (_x1_keys[idx] !== _x2_keys[idx]){
+                        return false;
+                    }
+                    if (_x1[_x1_keys[idx]] !== _x2[_x2_keys[idx]]){
+                        return false;
+                    }
+                }); // forEach에서의 return은 forEach에서만임/ 전체 함수에서 리턴하려면 flag 세워서 해야 함
+                return true;
+            }
+
+            const a = {name:'찰스', age:20};
+            const c = {name:'찰스', age:26};
+            console.log(cmp_ol(a,c));
+
+
+
+
+        </script>
+    </body>
+</html>
