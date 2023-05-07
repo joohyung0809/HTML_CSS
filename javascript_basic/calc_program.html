@@ -1,0 +1,152 @@
+<html>
+    <head>
+
+        <style>
+            button{
+                width: 50px;
+                height: 50px;
+                margin: 5px;
+            }
+
+            #operator {
+                width: 50px;
+                height: 50px;
+                margin: 5px;
+                text-align: center;
+            }
+
+            #result{
+                width: 180px;
+                height: 50px;
+                margin: 5px;
+                text-align: right;
+            }
+        </style> 
+    </head>
+
+    <body>
+
+        <div>
+            <input readonly id="operator">
+            <input readonly type="number" id="result">
+        </div>
+
+        <div>
+            <button id="n7">7</button>
+            <button id="n8">8</button>
+            <button id="n9">9</button>
+            <button id="op_plus">+</button>
+        </div>
+
+        <div>
+            <button id="n4">4</button>
+            <button id="n5">5</button>
+            <button id="n6">6</button>
+            <button id="op_sub">-</button>
+        </div>
+
+        <div>
+            <button id="n1">1</button>
+            <button id="n2">2</button>
+            <button id="n3">3</button>
+            <button id="op_mul">*</button>
+        </div>
+
+        <div>
+            <button id="op_clr">Clear</button>
+            <button id="n0">0</button>
+            <button id="op_calc">=</button>
+            <button id="op_div">/</button>
+        </div>
+
+        <script>
+
+            let numfirst =''; // 첫 번째 계산 숫자
+            let numsecond = ''; // 두 번째 계산 숫자
+            let op_input = null; // 연산자
+
+            
+            // higher order function -> return or argument를 함수로 받는 함수
+            const numFunc = (n)=> { // n --> '0', '1', '2' ..., '9'
+                // 함수를 만들어서 return    
+                return ()=>{
+                    if (op_input === null){
+                        numfirst = numfirst + n;
+                        cp_input_num.value = numfirst;
+                    }
+                    else {
+                        numsecond = numsecond + n;
+                        cp_input_num.value = numsecond;
+                    }                    
+                };
+            };  
+
+            //higher order function
+            const opFunc = (op)=> ()=>{
+                switch (op){
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                        op_input = op;
+                        cp_input_op.value = op_input;
+                        break;
+
+                    case '=':
+                        switch (op_input) {
+                            case '+':
+                                cp_input_num.value = parseInt(numfirst) + parseInt(numsecond);
+                                break;
+                            case '-':
+                                cp_input_num.value = parseInt(numfirst) - parseInt(numsecond);
+                                break;
+                            case '*':
+                                cp_input_num.value = parseInt(numfirst) * parseInt(numsecond);
+                                break;
+                            case '/':
+                                cp_input_num.value = parseInt(numfirst) / parseInt(numsecond);
+                                break;
+                        }
+                        break;
+
+
+                    case 'clear':
+                        numfirst =''
+                        numsecond =''
+                        cp_input_num.value = ''
+                        cp_input_op.value = ''
+                        break;                    
+                }
+            };
+            
+            
+            const cp_input_num = document.querySelector('#result')
+            const cp_input_op = document.querySelector('#operator')
+            // addEventListener('이벤트', '함수') 이므로 higher order function은 함수를 리턴하기에 
+            // 밑에 numFunc가 들어가는 자리가 올바르다.
+            document.querySelector('#n0').addEventListener('click', numFunc('0'));
+            document.querySelector('#n1').addEventListener('click', numFunc('1'));
+            document.querySelector('#n2').addEventListener('click', numFunc('2'));
+            document.querySelector('#n3').addEventListener('click', numFunc('3'));
+            document.querySelector('#n4').addEventListener('click', numFunc('4'));
+            document.querySelector('#n5').addEventListener('click', numFunc('5'));
+            document.querySelector('#n6').addEventListener('click', numFunc('6'));
+            document.querySelector('#n7').addEventListener('click', numFunc('7'));
+            document.querySelector('#n8').addEventListener('click', numFunc('8'));
+            document.querySelector('#n9').addEventListener('click', numFunc('9'));
+
+
+            document.querySelector('#op_plus').addEventListener('click', opFunc('+'));
+            document.querySelector('#op_sub').addEventListener('click', opFunc('-'));
+            document.querySelector('#op_mul').addEventListener('click', opFunc('*'));
+            document.querySelector('#op_div').addEventListener('click', opFunc('/'));
+            document.querySelector('#op_calc').addEventListener('click', opFunc('='));
+            document.querySelector('#op_clr').addEventListener('click', opFunc('clear'));
+            
+
+            
+        </script>
+    
+    </body>
+
+</html>

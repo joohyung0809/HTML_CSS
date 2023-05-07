@@ -1,0 +1,89 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <script>
+            // 1. fill 연산
+            const a = Array(10) // 10개짜리 빈 배열
+            a.fill(0) //괄호 안의 값으로 채우기
+            // Array(10).fill(0) 이렇게도 fill 사용가능
+
+            // 2. map --> 0으로 채워진 배열을 [1,2,3,4,...,10] 으로 만들어보기
+            const b= a.map( (_elem, _idx)=> {return _idx+1}  ) //index가 0부터라 +1 한 거임
+            console.log(b)
+            
+            // 3. sort
+            // 4. 복사본 만들어서 sort --> slice()  *splice랑 헷갈리지 말자*
+            // slice(처음 인덱스, 마지막 인덱스(not include))
+            // splice(처음 인덱스, 잘라낼 개수)
+
+            // [1, 2, 3]
+            // slice(1) --> [2, 3]
+            // slice(0, 1) --> [1]
+            // slice() --> [1,2,3] 전체 복사
+
+            const c = [45,33, 22, 11, 7, 99]
+            console.log(c)
+
+            /* const sc = c.slice().sort( (a,b)=> {
+                if (a<b){
+                    return -1; //negative
+                }
+                else if(a>b){
+                    return 1; //positive
+                }
+                else{
+                    return 0; //zero
+                }
+            } )
+
+            console.log('after c:'+c)
+            console.log('after sc:'+sc) */
+
+            // 간단하게 sort함수 구현
+            const sc = c.slice().sort( (a,b)=> a-b ) // 내림차순은 b-a 하면 됨
+
+            // 5. 문자열 정렬
+            //const d = ['banana', 'apple', 'orange']
+            //const d = ['호박', '수박', '포도', '사과']
+            //const d = ['banana', 'apple', 'orange','호박', '수박', '포도', '사과'] // 영문 먼저 sorting
+
+            /* const sd = d.slice().sort((a,b)=>{
+                if (a<b){
+                    return -1; //negative
+                }
+                else if(a>b){
+                    return 1; //positive
+                }
+                else{
+                    return 0; //zero
+                }
+            }) */
+
+            // 간단하게 만들기
+            //const sd = d.slice().sort((a,b)=>(a<b)?-1:(a>b)?1:0)  // 조건?결과:조건?결과:나머지조건결과
+            // ()=>{} 할 때, 한 줄로 할 거면 {} 없애야 동작함
+
+            // 가장 권장되는 문자열 정렬 방법
+            // const sd = d.slice().sort((a,b)=> a.localeCompare(b)) 
+
+            //console.log(d)
+            //console.log(sd)
+
+            // 6. localeCompare
+
+            const d = ['abc', 'Abc', 'zac', 'Zac']
+            const sd1 = d.slice().sort((a,b)=>(a<b)?-1:(a>b)?1:0)
+            const sd2 = d.slice().sort((a,b)=>a.localeCompare(b,{'sensitivity':'base'})) //{} -> 옵션설정
+            // localeCompare a<b -> -1 / a>b -> 1 / a==b -> 0 
+
+            console.log('d: ' + d);
+            console.log('sd1: ' + sd1);
+            console.log('sd2: ' + sd2);
+
+
+        </script>
+    </body>
+</html>

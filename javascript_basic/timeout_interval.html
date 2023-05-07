@@ -1,0 +1,50 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+
+        <div>
+            <h1 id="count_down"></h1>
+        </div>
+
+        <script>
+            //setTimeout : 일정시간 후에 실행
+
+            //const hello = ()=>{console.log('안녕')}
+            // setTimeout(hello,3000)  // 밀리세컨드 단위, 1/1000초 후에 실행
+
+            // setTimeout(() => {console.log('화살함수, 안녕')}, 3000)
+
+
+            // setInterval : 일정 주기로 실행
+            // clearInterval : 주기 함수를 종료
+            // _id = setInterval() ---> clearInterval(_id)
+
+
+            /* const _id = setInterval(hello, 1000)
+            setTimeout(() => {
+                clearInterval(_id)
+                console.log('clearInterval 호출되었음');
+            }, 5000) */
+
+
+            // 타이머를 만들어보자
+            let timer = 10;
+            const _id = setInterval(() => {
+                const cp_h1 = document.querySelector('#count_down')
+                cp_h1.textContent = timer
+                timer = timer - 1
+
+                if (timer < 0){
+                    clearInterval(_id)
+                    cp_h1.textContent = 'Done'
+                }
+            }, 1000)
+
+        </script>
+
+        
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+    <head></head>
+
+    <body>
+        <div>
+            <div>
+                <input type="checkbox">
+                <label for="">운동</label>
+            </div>
+
+            <div>
+                <input type="checkbox">
+                <label for="">쇼핑</label>
+            </div>
+        </div>
+
+        <script>
+            const inputs = document.querySelectorAll('input') 
+            // 배열 형태로 input들이 inputs에 들어가 있음
+
+            inputs.forEach(  (_ip, _idx)=> {
+                _ip.addEventListener('click', ()=>{
+                    console.log(_idx+' input click event 발생')
+                })
+            })
+
+            inputs.forEach(  (_ip, _idx)=> { // 하나의 개체에 두 가지 eventListner 걸 수 있음
+                _ip.addEventListener('click', ()=>{
+                    console.log(_idx+' 두 번째 event listner 발생')
+                })
+            })
+
+            // div에 대한 event listner 설정
+            const divs = document.querySelectorAll('div')
+            divs.forEach((_dv, _idx)=>{
+                _dv.addEventListener('click', ()=>{
+                    console.log(_idx+ ' div에 대한 event 발생')
+                })
+            })
+
+
+        </script>
+    </body>
+</html>
