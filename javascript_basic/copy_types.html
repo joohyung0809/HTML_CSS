@@ -1,0 +1,91 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <script>
+            /*let a = 1;
+            let b = a // 간단한 숫자 or 문자(primitive data type)는 공유하지 않고 복사해서 따로 존재함
+            b =10
+    
+            console.log('a is '+ a)
+            console.log(`b is ${b}`)*/
+
+            /*// object: key, value
+            const a = {'name':'alice', 'age':20}
+            const b = a // primitive data type이 아닌 애들은 값을 넣을 때 참조를 함
+            // object 객체가 const로 선언됐을 때 안의 원소가 바뀌는 건 괜찮아
+            // 근데 가리키는 것이 바뀔 때 문제가 되는 거야
+            const c ={'name':'john', 'age':21}
+
+            console.log('before ', a)
+
+            b.name = 'tom'
+            b = c; // const 선언한 것은 여기서 문제가 생기는 것임
+            console.log('after', a)*/
+
+
+            /*const a = [1,2,3]
+            const b = a
+
+            console.log('before ', a)
+            b[1] = 200 // 얘도 reference 됨
+
+            console.log('after', a)*/
+
+            /*const a = [1,2,3]
+            const b = [...a] //배열을 복사하고 싶으면(참조 말고) 이렇게*/
+
+            /*const a ={
+                name : 'john',
+                age : 20,
+                address : {
+                    city : 'incheon',
+                    street : 10
+                }
+            }*/
+
+
+            // console.log('a:', a.name, a['age'], a.address.city, a.address.street)
+
+            //const b = Object.assign({}, a) // a에 있는 모든 것을 {}안으로 넣겠다.
+            // Object 인터페이스에서 제공하는 것임. -> 복사해서 사용(shallow copy)
+
+            // object assign해서 copy되면 그 안의 객체는 또 shallow copy가 돼서 참조함
+            
+            // 전체가 복사되는 deep copy 하려면 아래와 같이 하자
+            // const b = JSON.parse(JSON.stringify(a)) // deep copy
+            // JSON은 javascript의 object를 전부 문자열로 표현한 것
+            // stringify --> 안의 원소들을 전부 분리
+            // parse --> 분리한 것을 다시 합침
+            // const b는 다 풀어서 합치면서 새로운 객체를 만들어 낸 것이다.
+            
+            // b.address.city = 'seoul'
+            // b.name = 'alice'; 
+            // console.log('after-------')
+            // console.log('a : ', a.name, a['age'], a.address.city, a.address.street)
+            // console.log('b : ', b.name, b['age'], b.address.city, b.address.street)
+
+
+            // 배열을 deep copy??
+            const a = ['alice', 20, {city: 'incheon', street:10}]
+            console.log('before ---------- ')
+            console.log(a[0], a[1], a[2].city, a[2].street)
+
+            // const b = [...a] // shallow copy --> {}로 선언된 애들은 복사 안 됨
+            // 이것도 JSON으로 해결
+            const b = JSON.parse(JSON.stringify(a))
+
+            b[0]='john'
+            b[1]= 20000
+            b[2].city = 'seoul'
+            b[2].street = 555
+
+            console.log("after ----------------")
+            console.log(a[0], a[1], a[2].city, a[2].street)
+            console.log(b[0], b[1], b[2].city, b[2].street)
+            
+        </script>
+    </body>
+</html>

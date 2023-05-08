@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <style>
+            table{
+                border-collapse: collapse; 
+                /* 선 합칠 때 collapse <-> seperate 선 나눌 때*/
+            }
+            td {
+                border: 3px solid black;
+                width: 50px;
+                height: 50px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <script>
+            const cp_table = document.createElement('table');
+            const cp_result = document.createElement('div')
+            let mark ='O'
+            let cnt = 0
+            
+            // td 위치를 기준으로 승패를 확인하는 함수
+            const checkWin = (_td) => {
+                let rowIndex = _td.parentNode.rowIndex;
+                let colIndex = _td.cellIndex
+
+                if(board[rowIndex][0].textContent === mark &&
+                   board[rowIndex][1].textContent === mark &&
+                   board[rowIndex][2].textContent === mark){ // 가로 줄이 맞는 경우
+                    return true
+                   }
+
+                if(board[0][colIndex].textContent === mark &&
+                board[1][colIndex].textContent === mark &&
+                board[2][colIndex].textContent === mark){ // 세로 줄이 맞는 경우
+                return true
+                }
+
+                if(board[0][0].textContent ===mark &&
+                   board[1][1].textContent ===mark &&
+                   board[2][2].textContent ===mark){ // back-slash 대각 검사
+                    return true
+                   }
+                
+                if(board[0][2].textContent ===mark &&
+                   board[1][1].textContent ===mark &&
+                   board[2][0].textContent ===mark){ // slash 대각 검사
+                    return true
+                   }
+                
+                return false
+            } 
+
+            const table_event_listner = () =>{
+                const which_td = event.target.closest('td') 
+                if(which_td.textContent !== ''){ // 이미 넣은 자리에 바꿀 수 없도록
+                    return;
+                }
+                // 이벤트 발생 한 것에서 가장 가까운 거 찾기 함수
+                which_td.textContent = mark;
+                cnt = cnt+1
+                if(checkWin(which_td)){
+                    cp_result.textContent = mark +'가 이겼습니다.'
+                    cp_table.removeEventListener('click', table_event_listner)
+                    return;
+                }
+                
+                // 모든 칸이 채워진 경우 -> 무승부 출력 & removeEventListner
+                //if (cnt ===9){ 밑에 것도 가능한데 밑에는 오버로드가 너무 큼
+                if (board.flat().every((_td) => _td.textContent !=='') ){
+                    // flat -> 1차원 배열로 / every(_td) -> 모든 _td에 대해 
+                    cp_result.textContent = "무승부입니다."
+                    cp_table.removeEventListener('click', table_event_listner)
+                    return
+                }
+                
+                // mark==='O'?'X':'O' if문이랑 동일
+                if (mark === 'O'){
+                    mark = 'X'
+                }
+                else {
+                    mark = 'O'
+                }
+
+            }
+
+            // td들을 저장하기 위한 별도의 2차원 배열(승부를 내기 위함)
+            const board = []
+
+
+            for (let i=0; i<3; i++){
+                const cp_tr = document.createElement('tr')
+                const t_row =[]
+                for (let j=0; j<3; j++){
+                    const cp_td = document.createElement('td')
+                    cp_tr.append(cp_td)
+                    t_row.push(cp_td)
+                }
+                board.push(t_row)
+                cp_table.append(cp_tr)
+            }
+
+            // 만들기만 해서 끝나는 게 아니라 body에 append 해줘야 함
+            document.body.append(cp_table);
+            document.body.append(cp_result);
+
+            cp_table.addEventListener('click', table_event_listner);
+        </script>
+
+
+        <!--       
+        너무 구시대 방법 -> 위에 처럼 하자  
+        <table> 
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td></tr>
+        </table> -->
+
+        
+        <div id="result">결과표시</div>
+    </body>
+</html>
